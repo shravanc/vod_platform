@@ -44,9 +44,8 @@ def index
   return true, { providers: Provider.all.as_json( only: provider_attributes) }
 end
 
-def show params
-  provider = Provider.find(params[:id])
-  return true, provider.as_json(only: provider_attributes)
+def show
+  return true, self.as_json(only: provider_attributes)
 end
 
 private

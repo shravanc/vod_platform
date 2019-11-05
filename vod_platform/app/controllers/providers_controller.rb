@@ -1,5 +1,9 @@
 class ProvidersController < ApplicationController
-  
+ 
+before_action only: [:show, :update] do
+  validate_resource("provider")
+end
+ 
 def create
   p = Provider.new
   status, data = p.create(params)
@@ -31,8 +35,8 @@ def index
 end
 
 def show
-  p = Provider.new
-  status, data = p.show(params)
+  #p = Provider.new
+  status, data = @resource.show
   if status
     render json: data, status: :ok
   else

@@ -6,6 +6,8 @@ has_many :apps
 validates :title, presence: true, uniqueness: true
 #validates :subdomain, presence: true, uniqueness: true
 
+before_create :create_authtoken
+after_create :create_subdomain
 
 def create params
   tenant = Tenant.new(params.require(:tenant).permit([:title, :subdoamin]))
@@ -51,6 +53,14 @@ end
 
 def tenant_attributes
   [ :id, :title, :email]
+end
+
+def create_subdomain
+  Apartment::Tenant.create(self.subdomain)
+end
+
+def destroy_subdomain
+  Apartment::Tenant.drop(self.subdomain)
 end
 
 end

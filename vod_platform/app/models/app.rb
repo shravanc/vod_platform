@@ -4,6 +4,8 @@ belongs_to :tenant
 
 validates :title, presence: true, uniqueness: true
 
+before_create :create_authtoken
+
 def create params
   app = App.new(params.require(:app).permit([:title]))
   app.tenant_id = params[:tenant_id]
