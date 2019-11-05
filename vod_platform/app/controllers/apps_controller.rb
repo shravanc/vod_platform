@@ -6,7 +6,9 @@ def create
   if status
     render json: data, status: :created
   else
-    render json: data, status: :unapprocessable_entity
+    Rails.logger.warn("***********************ERROR*************")
+    render_error(data, :unapprocessable_entity)
+    #render json: data, status: :unapprocessable_entity
   end
 end
 

@@ -4,13 +4,13 @@ belongs_to :provider
 has_many :apps
 
 validates :title, presence: true, uniqueness: true
-#validates :subdomain, presence: true, uniqueness: true
+validates :subdomain, presence: true, uniqueness: true
 
 before_create :create_authtoken
 after_create :create_subdomain
 
 def create params
-  tenant = Tenant.new(params.require(:tenant).permit([:title, :subdoamin]))
+  tenant = Tenant.new(params.require(:tenant).permit([:title, :subdomain]))
   tenant.provider_id = params[:provider_id]
   tenant.save
 
@@ -56,6 +56,7 @@ def tenant_attributes
 end
 
 def create_subdomain
+  Rails.logger.warn self.subdomain
   Apartment::Tenant.create(self.subdomain)
 end
 

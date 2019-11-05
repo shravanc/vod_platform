@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  email: MyString
-  authtoke: MyString
-  slug: MyString
+  title: Netflix
+  email: a@b.com
+  authtoken: abc
+  slug: netflix
 
 two:
-  title: MyString
-  email: MyString
-  authtoke: MyString
-  slug: MyString
+  title: Amazon
+  email: a@b.com
+  authtoken: ab
+  slug: amazon

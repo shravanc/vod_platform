@@ -43,4 +43,6 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  TOKEN_LIST = [{resource: "App", token_name: :app_token} , {resource: "Tenant", token_name: :tenant_token }, {resource: "Provider", token_name: :provider_token }]
+  SECRET_KEY = "abc"
 end
