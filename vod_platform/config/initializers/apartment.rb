@@ -17,7 +17,7 @@ Apartment.configure do |config|
   # A typical example would be a Customer or Tenant model that stores each Tenant's information.
   #
 
-  config.excluded_models = %w{ Provider Tenant App }
+  config.excluded_models = %w{ Provider Tenant App Service}
   config.default_schema  = "public"
 
   # In order to migrate all of your Tenants you need to provide a list of Tenant names to Apartment.

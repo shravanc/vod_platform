@@ -5,4 +5,4 @@ tenant = Tenant.where(title: 'tenant_1', subdomain: 'netflix', provider_id: prov
 
 app = App.where(title: "android", tenant_id: tenant.id ).first_or_create
 
-
+services = Service.where(system: [{"service": "list_system", "host": "http://localhost:3001/items"}, {"service": "user_system", "host": "http://localhost:3002/users" }]).first_or_Create
