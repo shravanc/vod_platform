@@ -4,7 +4,7 @@ class CreateApps < ActiveRecord::Migration[5.2]
       t.string :title, default: ""
       t.string :description, default: ""
       t.integer :tenant_id, default: ""
-      t.string :authtoken, default: ""
+      t.string :auth_token, default: ""
 
       t.timestamps
     end

@@ -5,7 +5,7 @@ validates :title, presence: true, uniqueness: true
 #validates :slug, uniqueness: true
 
 
-before_create :create_authtoken
+before_create :create_auth_token
 after_create :send_notification
 
 def create params
@@ -55,7 +55,7 @@ def provider_parameters(params)
 end
 
 def provider_attributes
-  [ :id, :title, :email]
+  [ :id, :title, :email, :auth_token]
 end
 
 end

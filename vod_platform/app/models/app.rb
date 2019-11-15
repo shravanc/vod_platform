@@ -4,7 +4,9 @@ belongs_to :tenant
 
 validates :title, presence: true, uniqueness: true
 
-before_create :create_authtoken
+before_create :create_auth_token
+before_create :create_list_system_app
+
 
 def create params
   app = App.new(params.require(:app).permit([:title]))
@@ -38,7 +40,7 @@ end
 
 def show params
   app = App.find(params[:id])
-  return true, app.as_json(only: app_attributes)
+  return true, app.as_json(only: app_attributes << :auth_token)
 end
 
 private
@@ -49,6 +51,10 @@ end
 
 def app_attributes
   [ :id, :title, :email]
+end
+
+def create_list_system_app
+  data = {title: self.title, auth_token: self.auth_token}
 end
 
 end

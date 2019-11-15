@@ -6,7 +6,7 @@ has_many :apps
 validates :title, presence: true, uniqueness: true
 validates :subdomain, presence: true, uniqueness: true
 
-before_create :create_authtoken
+before_create :create_auth_token
 after_create :create_subdomain
 
 def create params

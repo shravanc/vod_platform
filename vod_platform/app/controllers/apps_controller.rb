@@ -12,9 +12,9 @@ def create
   end
 end
 
-def uappdate
+def update
   app = App.new
-  status, data = app.utenantdate(params)
+  status, data = app.update(params)
   if status
     render json: data, status: :created
   else

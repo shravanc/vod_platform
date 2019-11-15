@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
 
-before_action :validate_authtoken
+before_action :validate_auth_token
 
 
 def validate_resource resource
@@ -24,21 +24,31 @@ def get_token
 
 end
 
-def validate_authtoken
+def validate_auth_token
   puts(params)
-  if authtoken = params[:authtoken]
-    return if authtoken == SECRET_KEY
+  @app = nil
+  if auth_token = params[:auth_token]
+    return if auth_token == SECRET_KEY
   end
   
   TOKEN_LIST.each do | tk |
-    @app = tk[:resource].capitalize.constantize.find_by_authtoken(params[tk[:token_name]])
-    break if app
+    Rails.logger.warn "***#{tk}***"
+    @app = tk[:resource].capitalize.constantize.find_by_auth_token(params[:auth_token])
+    break if @app
+  end
+  
+  if @app.nil?
+    render json: {message: "Invalid auth_otken"}
   end
 
-  subdomain = app.tenant.last.subdomain
-  Apartment::Tenant.switch(subdomain) if subdomain
+  if !@app.tenants.empty?
+    subdomain = @app.tenants.last.subdomain
+    Apartment::Tenant.switch(subdomain) do 
+      p "switching the schema"
+    end if subdomain
+    return
+  end
 
-  render json: {message: "Invalid authtoken"}, status: :unprocessable_entity
 end
 
 def render_error(resource, status)

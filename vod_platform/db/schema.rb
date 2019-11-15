@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2019_11_05_225008) do
     t.string "title", default: ""
     t.string "description", default: ""
     t.integer "tenant_id"
-    t.string "authtoken", default: ""
+    t.string "auth_token", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2019_11_05_225008) do
   create_table "providers", force: :cascade do |t|
     t.string "title", default: ""
     t.string "email", default: ""
-    t.string "authtoken", default: ""
+    t.string "auth_token", default: ""
     t.string "slug", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2019_11_05_225008) do
   create_table "tenants", force: :cascade do |t|
     t.string "title", default: ""
     t.integer "provider_id"
-    t.string "authtoken", default: ""
+    t.string "auth_token", default: ""
     t.string "subdomain", default: ""
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

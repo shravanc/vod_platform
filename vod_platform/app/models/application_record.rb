@@ -3,8 +3,8 @@ class ApplicationRecord < ActiveRecord::Base
 
 
 
-def create_authtoken
-  self.authtoken = SecureRandom.alphanumeric(16)
+def create_auth_token
+  self.auth_token = SecureRandom.alphanumeric(16)
 end
 
 def send_notification
