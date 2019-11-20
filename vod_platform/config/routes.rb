@@ -8,26 +8,22 @@ resources :providers do
   end
 end
 
-#User System
-  resources :users do
-    collection do
-      post :forgot_password
-      get :confirmation
-      put :set_password
-    end
+namespace :admin do
+  resources :users
+  resources :sessions do 
+    resources :items
+    resources :lists
+    resources :layouts
   end
-
-  resources :sessions do
-    post :update_profile
-    put :change_password
+  resources :roles do
+    resources :privileges
   end
+end
 
 
-#List System
-  resources :lists
-  resources :items
-  resources :media
-  resources :layouts
+
+
+
 
 
 
