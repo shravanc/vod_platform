@@ -1,4 +1,3 @@
-#require 'user_service'
 class UsersController < ApplicationController
 def create
   ls = UserService.new(request, params)

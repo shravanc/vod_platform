@@ -1,4 +1,3 @@
-require 'admin_service'
 class Admin::SessionsController < ApplicationController
 
 def index
