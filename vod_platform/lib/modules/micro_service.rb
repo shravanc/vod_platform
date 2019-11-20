@@ -9,7 +9,7 @@ def initialize request, params
   @path       = request.path.gsub("/admin", "")
   @controller = self.data["controller"].gsub("admin/", "")
   @body_key   = self.controller.singularize
-  @url        = self.access.path.gsub("/admin")
+  @url        = self.access.path.gsub("/admin", "")
   @privilege  = self.method + "_" + self.data["action"]
 end
 

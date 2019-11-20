@@ -1,37 +1,21 @@
-class UserService
+require "micro_service"
 
 
-def initialize request, params
-  @request = request
-  @data = nil
-  @response = nil
+class UserService < MicroService
+attr_accessor :host
+
+def initialize request=nil, params=nil
+  @host = "http://localhost:3003"
+  super
 end
 
 def call
+  self.resp = self.send(self.access.method.downcase)
 end
 
 def get_response
+  return [ self.resp, :ok ]
 end
 
-def error_response
-end
-
-def get params={}
-  url = params[i:url]
-  url = "http://localhost:3001/lists"
-  return HTTParty.get(url).to_json
-end
-
-def post params={}
-
-end
-
-def put params={}
-
-end
-
-def destroy params={}
-
-end
 
 end
