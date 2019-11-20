@@ -14,11 +14,15 @@ namespace :admin do
     resources :items
     resources :lists
     resources :layouts
+    resources :media
   end
   resources :roles do
     resources :privileges
   end
   resources :lists
+  resources :items
+  resources :media
+  resources :layouts
 end
 
 

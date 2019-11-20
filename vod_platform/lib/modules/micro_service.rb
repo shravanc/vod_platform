@@ -24,17 +24,17 @@ def error_response
 end
 
 def get
-  Rails.logger.warn construct_url
-  return HTTParty.get(construct_url, :headers => construct_header).to_json
+  url = construct_url + "/" + (self.data["id"] || "")
+  return HTTParty.get(url, :headers => construct_header).to_json
 end
 
 def post
-  Rails.logger.warn construct_url
   return HTTParty.post(construct_url, :headers => construct_header, :body => construct_body.to_json)
 end
 
 def put
-
+  url = construct_url + "/" + (self.data["id"] || "")
+  return HTTParty.put(url, :headers => construct_header, :body => construct_body.to_json)
 end
 
 def destroy
@@ -53,7 +53,7 @@ def construct_url
 end
 
 def construct_body
-  return self.data[self.body_key]
+  return { self.body_key => self.data[self.body_key] }
 end
 
 def construct_header

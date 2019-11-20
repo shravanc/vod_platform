@@ -1,6 +1,5 @@
-require "list_service"
-class Admin::ListsController < ApplicationController
-
+require 'layout_service'
+class Admin::LayoutsController < ApplicationController
 
 def index
   ls = ListService.new(request, params)
@@ -13,16 +12,6 @@ def index
   render json: data, status: status
 end
 
-def show
-  ls = ListService.new(request, params)
-  ls.call
-  if ls.valid?
-    data, status = ls.get_response
-  else
-    data, status = ls.error_response
-  end
-  render json: data, status: status
-end
 
 def create
   ls = ListService.new(request, params)
@@ -51,23 +40,5 @@ def update
   end
   render json: data, status: status
 end
-
-
-def destroy
-  ls = ListService.new(request, params)
-  ls.call
-  if ls.valid?
-    data, status = ls.get_response
-  else
-    data, status = ls.error_response
-  end
-  render json: data, status: status
-end
-
-
-
-
-
-
 
 end

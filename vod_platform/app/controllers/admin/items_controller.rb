@@ -1,20 +1,9 @@
-require "list_service"
-class Admin::ListsController < ApplicationController
+require "item_service"
 
+class Admin::ItemsController < ApplicationController
 
 def index
-  ls = ListService.new(request, params)
-  ls.call
-  if ls.valid?
-    data, status = ls.get_response
-  else
-    data, status = ls.error_response
-  end
-  render json: data, status: status
-end
-
-def show
-  ls = ListService.new(request, params)
+  ls = ItemService.new(request, params)
   ls.call
   if ls.valid?
     data, status = ls.get_response
@@ -25,7 +14,7 @@ def show
 end
 
 def create
-  ls = ListService.new(request, params)
+  ls = ItemService.new(request, params)
   resp = ls.authorized?
   if resp.code != 200
     render json: {message: "User not autorized"}, status: :unprocessable_entity
@@ -40,9 +29,8 @@ def create
   render json: data, status: status
 end
 
-
 def update
-  ls = ListService.new(request, params)
+  ls = ItemService.new(request, params)
   ls.call
   if ls.valid?
     data, status = ls.get_response
@@ -51,10 +39,9 @@ def update
   end
   render json: data, status: status
 end
-
 
 def destroy
-  ls = ListService.new(request, params)
+  ls = ItemService.new(request, params)
   ls.call
   if ls.valid?
     data, status = ls.get_response
@@ -63,11 +50,5 @@ def destroy
   end
   render json: data, status: status
 end
-
-
-
-
-
-
 
 end
