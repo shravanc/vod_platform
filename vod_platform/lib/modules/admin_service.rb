@@ -4,7 +4,7 @@ require "micro_service"
 class AdminService < MicroService
 attr_accessor :host
 
-def initialize request, params
+def initialize request=nil, params=nil
   @host = "http://localhost:3001"
   super
 end

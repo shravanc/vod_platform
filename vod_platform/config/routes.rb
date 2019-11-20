@@ -18,6 +18,7 @@ namespace :admin do
   resources :roles do
     resources :privileges
   end
+  resources :lists
 end
 
 

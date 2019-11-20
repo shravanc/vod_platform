@@ -10,6 +10,7 @@ def initialize request, params
   @controller = self.data["controller"].gsub("admin/", "")
   @body_key   = self.controller.singularize
   @url        = self.access.path.gsub("/admin")
+  @privilege  = self.method + "_" + self.data["action"]
 end
 
 def call
@@ -22,19 +23,21 @@ def error_response
   return [ {message: "Request Failed, Please contact Admin"}, :unprocessable_entity]
 end
 
-def get params={}
+def get
+  Rails.logger.warn construct_url
   return HTTParty.get(construct_url, :headers => construct_header).to_json
 end
 
 def post
+  Rails.logger.warn construct_url
   return HTTParty.post(construct_url, :headers => construct_header, :body => construct_body.to_json)
 end
 
-def put params={}
+def put
 
 end
 
-def destroy params={}
+def destroy
 
 end
 
