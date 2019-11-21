@@ -7,8 +7,12 @@ validates :title, presence: true, uniqueness: true
 validates :subdomain, presence: true, uniqueness: true
 
 before_create :create_auth_token
+before_create :update_micro_services
 after_create :create_subdomain
 
+
+before_destroy :destroy_subdomain
+before_destroy :update_micro_services_schema
 def create params
   tenant = Tenant.new(params.require(:tenant).permit([:title, :subdomain]))
   tenant.provider_id = params[:provider_id]
@@ -45,6 +49,26 @@ def show params
   return true, provider.as_json(only: tenant_attributes)
 end
 
+def update_micro_services
+  services = YAML.load_file("#{Rails.root.to_s}/lib/modules/services.yml")
+  headers = {'Content-Type'=>'application/json', 'Accept' => 'application/json'}
+
+  services["services"].each do |k, v|
+    url = "http://localhost:#{v["port"]}/tenants"
+    body = {"tenant" => {"title"=> self.title, "subdomain" => self.subdomain} }
+    HTTParty.post(url, :headers => headers, :body => body.to_json)
+  end
+end
+def update_micro_services_schema
+  services = YAML.load_file("#{Rails.root.to_s}/lib/modules/services.yml")
+  headers = {'Content-Type'=>'application/json', 'Accept' => 'application/json'}
+
+  services["services"].each do |k, v|
+    url = "http://localhost:#{v["port"]}/tenants/#{self.subdomain}"
+    body = { "subdomain" => self.subdomain }
+    HTTParty.delete(url, :headers => headers, :body => body.to_json)
+  end
+end
 private
 
 def tenant_parameters(params)
@@ -52,7 +76,7 @@ def tenant_parameters(params)
 end
 
 def tenant_attributes
-  [ :id, :title, :email]
+  [ :id, :title ]
 end
 
 def create_subdomain
@@ -63,5 +87,8 @@ end
 def destroy_subdomain
   Apartment::Tenant.drop(self.subdomain)
 end
+
+
+
 
 end

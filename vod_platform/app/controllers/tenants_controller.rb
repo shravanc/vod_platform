@@ -41,13 +41,8 @@ def show
 end
 
 def destroy
-  tenant = Tenant.new
-  status, data = tenant.destroy(params)
-  if status
-    render json: data, status: :created
-  else
-    render json: data, status: :untenantrocessable_entity
-  end
+  Tenant.find_by(subdomain: params[:subdomain]).destroy
+  render json: {}, status: :ok
 end
 
 

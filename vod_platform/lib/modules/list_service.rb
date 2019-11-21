@@ -3,8 +3,10 @@ class ListService < MicroService
 attr_accessor :host
 
 def initialize request=nil, params=nil
-  @host = "http://localhost:3002"
+  #@host = "http://localhost:3002"
   super
+  @host = "http://" + self.access.domain + ":3002"
+  Rails.logger.warn @host
 end
 
 def authorized?
