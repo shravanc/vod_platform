@@ -37,7 +37,9 @@ end
   get '/layouts', to: redirect('admin/layouts')
   get '/layouts/:id', to: redirect('admin/layouts/%{id}')
 
-  resources :users
+
+  get 'users/confirmation', to: "users#confirmation"
+  resources :users  
   resources :sessions
   
 

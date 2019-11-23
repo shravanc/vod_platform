@@ -24,13 +24,23 @@ def error_response
   return [ {message: "Request Failed, Please contact Admin"}, :unprocessable_entity]
 end
 
-def get
-  url = construct_url + "/" + (self.data["id"] || "")
-  return HTTParty.get(url, :headers => construct_header).to_json
+def get path=nil
+  if path.nil?
+    url = construct_url + "/" + (self.data["id"] || "")
+    return HTTParty.get(url, :headers => construct_header).to_json
+  else
+    url = self.host + "/" + path
+    Rails.logger.warn "----#{url}"
+    return HTTParty.get(url).to_json
+  end
 end
 
-def post
-  return HTTParty.post(construct_url, :headers => construct_header, :body => construct_body.to_json)
+def post path=nil
+  if path.nil?
+    return HTTParty.post(construct_url, :headers => construct_header, :body => construct_body.to_json)
+  else
+    return HTTParty.post(self.host + "/" + path, :headers => construct_header, :body => construct_body.to_json)
+  end
 end
 
 def put
