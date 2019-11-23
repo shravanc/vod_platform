@@ -1,8 +1,9 @@
 class MicroService
-attr_accessor :access, :data, :resp, :method, :path, :controller, :body_key, :url
+attr_accessor :access, :data, :resp, :method, :path, :controller, :body_key, :url, :subdomain
 
 def initialize request, params
   @access     = request
+  @subdomain  = self.access.subdomain + "." + self.access.domain
   @data       = params.as_json
   @resp       = nil
   @method     = request.method

@@ -5,8 +5,8 @@ class UserService < MicroService
 attr_accessor :host
 
 def initialize request=nil, params=nil
-  @host = "http://localhost:3003"
   super
+  @host = "http://" + self.subdomain + ":3003"
 end
 
 def call
