@@ -1,6 +1,3 @@
-require "micro_service"
-
-
 class UserService < MicroService
 attr_accessor :host
 

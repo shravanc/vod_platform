@@ -1,14 +1,18 @@
 class Admin::UsersController < ApplicationController
 
+before_action :initialize_service
+
 def create
-  ls = AdminService.new(request, params)
-  ls.call
-  if ls.valid?
-    data, status = ls.get_response
-  else
-    data, status = ls.error_response
-  end
+  data, status = @service.communicate
   render json: data, status: status
 end
+
+
+private
+
+def initialize_service
+  @service = AdminMicroService.new(request, params)
+end
+
 
 end

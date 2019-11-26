@@ -1,9 +1,7 @@
-require "micro_service"
 class ListService < MicroService
 attr_accessor :host
 
 def initialize request=nil, params=nil
-  #@host = "http://localhost:3002"
   super
   @host = "http://" + self.subdomain + ":3002"
   Rails.logger.warn @host

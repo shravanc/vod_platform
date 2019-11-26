@@ -1,14 +1,14 @@
 class SessionsController < ApplicationController
+before_action :initialize_service
 
 def create
-  as = UserService.new request, params
-  as.call
-  if as.valid?
-    data, status = as.get_response
-  else
-    data, status = as.error_response
-  end
+  data, status = @service.communicate()
   render json: data, status: status
-end 
+end
+
+private 
+def initialize_service
+  @service = ListMicroService.new(request, params)
+end
 
 end

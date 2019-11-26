@@ -2,12 +2,6 @@ services:
   lists:
     class: ListService
     port: 3002
-  layouts:
-    class: LayoutService
-    port: 3002
-  media:
-    class: MediaService
-    port: 3002
   user:
     class: UserService
     port: 3003

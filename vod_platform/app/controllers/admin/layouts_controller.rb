@@ -1,44 +1,34 @@
-require 'layout_service'
 class Admin::LayoutsController < ApplicationController
+before_action :initialize_service
 
 def index
-  ls = ListService.new(request, params)
-  ls.call
-  if ls.valid?
-    data, status = ls.get_response
-  else
-    data, status = ls.error_response
-  end
+  data, status = @service.communicate
   render json: data, status: status
 end
 
+def show
+  data, status = @service.communicate
+  render json: data, status: status
+end
 
 def create
-  ls = ListService.new(request, params)
-  resp = ls.authorized?
-  if resp.code != 200
-    render json: {message: "User not autorized"}, status: :unprocessable_entity
-    return
-  end
-  ls.call
-  if ls.valid?
-    data, status = ls.get_response
-  else
-    data, status = ls.error_response
-  end
+  data, status = @service.communicate({authorize: true})
   render json: data, status: status
 end
 
-
 def update
-  ls = ListService.new(request, params)
-  ls.call
-  if ls.valid?
-    data, status = ls.get_response
-  else
-    data, status = ls.error_response
-  end
+  data, status = @service.communicate({authorize: true})
   render json: data, status: status
+end
+
+def destroy
+  data, status = @service.communicate({authorize: true})
+  render json: data, status: status
+end
+private
+
+def initialize_service
+  @service = ListMicroService.new(request, params)
 end
 
 end
