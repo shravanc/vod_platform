@@ -1,6 +1,5 @@
 require "micro_service"
 
-
 class AdminService < MicroService
 attr_accessor :host
 

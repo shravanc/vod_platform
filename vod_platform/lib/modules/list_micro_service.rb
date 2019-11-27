@@ -1,8 +1,13 @@
 class ListMicroService < Services
   attr_accessor :request, :params
   
+  @instance = new
+  private_class_method :new
+  def self.instance
+    @instance
+  end
 
-  def initialize req=nil, par=nil
+  def attributes req=nil, par=ni
     self.request = req
     self.params  = par
   end

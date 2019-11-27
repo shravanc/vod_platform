@@ -8,7 +8,8 @@ end
 
 private 
 def initialize_service
-  @service = ListMicroService.new(request, params)
+  @service = UserMicroService.instance
+  @service.attributes(request, params)
 end
 
 end

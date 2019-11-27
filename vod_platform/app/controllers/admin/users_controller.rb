@@ -11,7 +11,8 @@ end
 private
 
 def initialize_service
-  @service = AdminMicroService.new(request, params)
+  @service = ListMicroService.instance
+  @service.attributes(request, params)
 end
 
 
