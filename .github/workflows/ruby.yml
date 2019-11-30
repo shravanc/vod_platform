@@ -30,6 +30,7 @@ jobs:
           RAILS_ENV: test
         run: |
           sudo apt-get -yqq install libpq-dev
+          cd vod_platform
           gem install bundler
           bundle install --jobs 4 --retry 3
           bundle exec rails db:prepare
