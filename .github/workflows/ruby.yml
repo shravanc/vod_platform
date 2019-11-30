@@ -26,8 +26,7 @@ jobs:
           cmd: install
       - name: Build and run tests
         env:
-          DATABASE_URL: postgres://postgres:welcome@localhost:5432/test
-          REDIS_URL: redis://localhost:6379/0
+          DATABASE_URL: postgres://postgres:welcome@localhost:5432/vod_platform_test
           RAILS_ENV: test
         run: |
           sudo apt-get -yqq install libpq-dev
