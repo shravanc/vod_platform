@@ -10,9 +10,9 @@ services = Service.where(system: [{"service": "list_system", "host": "http://loc
 =end
 
 provider = Provider.where(title: 'amazon').first_or_create
-tenant   = Tenant.where(title: 'amazon', subdomin: 'amazon', provider_id: provider.id).first_or_create
+tenant   = Tenant.where(title: 'amazon', subdomain: 'amazon', provider_id: provider.id).first_or_create
 app      = App.where(title: "android", tenant_id: tenant.id).first_or_create
 
 provider = Provider.where(title: 'netflix').first_or_create
-tenant   = Tenant.where(title: 'netflix', subdomin: 'netflix', provider_id: provider.id).first_or_create
+tenant   = Tenant.where(title: 'netflix', subdomain: 'netflix', provider_id: provider.id).first_or_create
 app      = App.where(title: "android", tenant_id: tenant.id).first_or_create

@@ -3,11 +3,11 @@
 one:
   title: Netflix
   email: a@b.com
-  authtoken: abc
+  auth_token: abc
   slug: netflix
 
 two:
   title: Amazon
   email: a@b.com
-  authtoken: ab
+  auth_token: ab
   slug: amazon

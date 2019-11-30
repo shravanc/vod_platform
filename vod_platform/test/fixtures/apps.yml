@@ -4,10 +4,10 @@ one:
   title: MyString
   description: MyString
   tenant_id: 1
-  authtoken: MyString
+  auth_token: MyString
 
 two:
   title: MyString
   description: MyString
   tenant_id: 1
-  authtoken: MyString
+  auth_token: MyString

@@ -4,7 +4,7 @@ require 'json'
 class ProvidersControllerTest < ActionDispatch::IntegrationTest
 
   test "Should get valid list of providers" do
-    get '/providers?authtoken=abc'
+    get '/providers?auth_token=abc'
     assert_response :success
     assert_equal response.content_type, 'application/json'
     jdata = JSON.parse response.body
@@ -15,7 +15,7 @@ class ProvidersControllerTest < ActionDispatch::IntegrationTest
 
   test "Should get valid provider data" do
     provider = providers('one')
-    get "/providers/#{provider.id}?authtoken=abc" #, params: { id: provider.id }
+    get "/providers/#{provider.id}?auth_token=abc" #, params: { id: provider.id }
     assert_response :success
     jdata = JSON.parse response.body
     puts jdata
@@ -24,7 +24,7 @@ class ProvidersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "Should get JSON:API error block when requesting provider data with invalid ID" do
-    get "/providers/invalid?authtoken=abc"
+    get "/providers/invalid?auth_token=abc"
     assert_response 404
     jdata = JSON.parse response.body
     assert_equal "Wrong ID provided", jdata['errors'][0]['detail']
