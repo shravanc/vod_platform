@@ -2,7 +2,6 @@ class ApplicationController < ActionController::API
 
 before_action :validate_auth_token
 
-
 def validate_resource resource
   resource = resource.capitalize.constantize 
   begin
@@ -25,7 +24,7 @@ def get_token
 end
 
 def validate_auth_token
-  puts(params)
+  Rails.logger.warn("***************************#{params}")
   @app = nil
   if auth_token = params[:auth_token]
     return if auth_token == SECRET_KEY
@@ -55,6 +54,21 @@ def render_error(resource, status)
   render json: resource, status: status, adapter: :json_api, serializer: ActiveModel::Serializer::ErrorSerializer
 end
 
+def subscription_dispatcher
+  interceptors = []
+  interceptors << SubscriptionInterceptor.new
+  interceptors << EmptyReviewInterceptor.new
 
+  dispatcher = SubscriptionDispatcher.new(interceptors)
+  dispatcher
+end
+
+
+def notify_subscription_dispatcher context
+  status = subscription_dispatcher.event_triggered context
+  unless status
+    render json: {message: "Failed to meet requirements"}
+  end
+end
 
 end

@@ -29,7 +29,9 @@ end
 private
 
 def initialize_service
-  @service = ListMicroService.new(request, params)
+  @service = ListMicroService.instance
+  @service.attributes(request, params)
+  #@service = ListMicroService.new(request, params)
 end
 
 

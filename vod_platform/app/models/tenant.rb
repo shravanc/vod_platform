@@ -54,6 +54,9 @@ def update_micro_services
   headers = {'Content-Type'=>'application/json', 'Accept' => 'application/json'}
 
   services["services"].each do |k, v|
+    if ['recommend', 'review'].include?k
+      next
+    end
     url = "http://localhost:#{v["port"]}/tenants"
     body = {"tenant" => {"title"=> self.title, "subdomain" => self.subdomain} }
     HTTParty.post(url, :headers => headers, :body => body.to_json)

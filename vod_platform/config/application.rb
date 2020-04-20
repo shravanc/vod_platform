@@ -25,6 +25,10 @@ module VodPlatform
 
     config.autoload_paths += %W(#{config.root}/lib/modules/services)
     config.autoload_paths += %W(#{config.root}/lib/modules)
+    config.autoload_paths += %W(#{config.root}/lib/interceptor)
+    config.autoload_paths += %W(#{config.root}/lib/interceptor/contexts)
+    config.autoload_paths += %W(#{config.root}/lib/interceptor/dispatchers)
+    config.autoload_paths += %W(#{config.root}/lib/interceptor/interceptors)
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

@@ -8,4 +8,9 @@ services:
   admin:
     class: AdminService
     port: 3001
-
+  recommend:
+    class: RecommendationService
+    port: 5000
+  review:
+    class: ReviewService
+    port: 5001

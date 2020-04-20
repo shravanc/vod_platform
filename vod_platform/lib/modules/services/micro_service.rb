@@ -36,6 +36,7 @@ def get path=nil
 end
 
 def post path=nil
+  Rails.logger.warn "****POST call****"
   if path.nil?
     return HTTParty.post(construct_url, :headers => construct_header, :body => construct_body.to_json)
   else

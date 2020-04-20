@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+resources :recommendations
+resources :reviews
+
+
 resources :providers do
   resources :tenants do 
     resources :apps do
