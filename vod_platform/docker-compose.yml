@@ -1,0 +1,25 @@
+version: "3.4"
+
+volumes:
+  db-data:
+    external: false
+
+services:
+  db:
+    environment:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+    image: postgres:10.12
+    volumes:
+      - db-data:/usr/local/pgsql/data
+
+  app:
+    env_file: .env
+    build: .
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+

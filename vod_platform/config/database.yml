@@ -1,22 +1,22 @@
+# config/database.yml
 default: &default
   adapter: postgresql
-  username: postgres
-  password: welcome
-
-  encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV["POSTGRES_HOST"] %>
+  username: <%= ENV["POSTGRES_USER"] %>
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
+  encoding: utf8
+  min_messages: warning
+  pool: 2
+  timeout: 5000
 
 development:
   <<: *default
-  database: vod_platform
-  host: localhost
-  port: 5432
-
+  database: vod_platform_dev
 
 test:
   <<: *default
   database: vod_platform_test
-  host: localhost
-  port: 5432
+
+production:
+  <<: *default
+  database: vod_platform
